@@ -1,3 +1,5 @@
+package Entity;
+
 public class Piatto {
     String nomePiatto;
     StringBuilder descrizione;
@@ -10,16 +12,15 @@ public class Piatto {
     }
 
     public StringBuilder getDescrizione() { return descrizione; }
-    public void setDescrizione(StringBuilder descrizione) {
-        this.descrizione = descrizione;
-    }
     public String getNomePiatto() {
         return nomePiatto;
     }
-    public void setNomePiatto(String nomePiatto) {
-        this.nomePiatto = nomePiatto;
-    }
     public int getPrezzo() { return prezzo; }
+
+    public void setDescrizione(StringBuilder descrizione) {
+        this.descrizione = descrizione;
+    }
+    public void setNomePiatto(String nomePiatto) { this.nomePiatto = nomePiatto; }
     public void setPrezzo(int prezzo) {
         this.prezzo = prezzo;
     }

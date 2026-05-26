@@ -1,4 +1,4 @@
-
+package Entity;
 
 public abstract class Utente {
     private String nome;

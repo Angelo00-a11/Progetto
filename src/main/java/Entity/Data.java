@@ -1,3 +1,5 @@
+package Entity;
+
 public class Data {
 
     private String giorno;
@@ -14,4 +16,7 @@ public class Data {
     public int getInizioServizio() { return inizioServizio; }
     public int getFineServizio() { return fineServizio; }
 
+    public void setInizioServizio(int inizioServizio) {this.inizioServizio = inizioServizio; }
+    public void setFineServizio(int fineServizio) { this.fineServizio = fineServizio; }
+    public void setGiorno(String giorno) { this.giorno = giorno; }
 }

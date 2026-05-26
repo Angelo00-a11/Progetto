@@ -1,9 +1,11 @@
+package Entity;
+
 import java.util.ArrayList;
 
 public class Cliente extends Utente {
 
     Ordine ordine;
-   // Ordine OrdiniEffettuati[]; C-style
+   // Entity.Ordine OrdiniEffettuati[]; C-style
     ArrayList<Ordine> OrdiniEffettuati;
     ArrayList<Ristorante> ristorantiDisponibili;
 
@@ -22,7 +24,12 @@ public class Cliente extends Utente {
         return res;
     }
 
-    private int Ordina(Ordine ordine){
+    private int CreaOrdine(){
+        //Implementazione specifica
+        return 0;
+    }
+
+    public int Ordina(Ordine ordine){
         //Implementazione specifica
 
         ordine.statoOrdine="inviato";

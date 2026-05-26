@@ -1,5 +1,6 @@
-
-
+import Entity.Amministratore;
+import Entity.Cliente;
+import Entity.Ristoratore;
 
 void main() {
 
@@ -18,18 +19,18 @@ void main() {
     Ristoratore r;
     Amministratore a;
 
-    if (ruolo.equalsIgnoreCase("Cliente")) {
+    if (ruolo.equalsIgnoreCase("Entity.Cliente")) {
         c = new Cliente(nome, cognome, email, ruolo, via,civico,citta,cap);
         c.Register(nome, cognome, email, ruolo);
     }
-    if (ruolo.equalsIgnoreCase("Ristoratore")) {
+    if (ruolo.equalsIgnoreCase("Entity.Ristoratore")) {
         r = new Ristoratore(nome, cognome, email, ruolo, via,civico,citta,cap);
         r.Register(nome, cognome, email, ruolo);
     }
-    if (ruolo.equalsIgnoreCase("Amministratore")) {
+    if (ruolo.equalsIgnoreCase("Entity.Amministratore")) {
         a = new Amministratore(nome, cognome, email, ruolo, via,civico,citta,cap);
         a.Register(nome, cognome, email, ruolo);
     }
 
-    //int res = c.Ordina(new Ordine(null,c.indirizzo,null));
+    //int res = c.Ordina(new Entity.Ordine(null,c.indirizzo,null));
 }

@@ -1,3 +1,5 @@
+package Entity;
+
 public class Indirizzo {
 
     private String via;

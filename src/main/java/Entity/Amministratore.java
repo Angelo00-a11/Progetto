@@ -1,3 +1,5 @@
+package Entity;
+
 public class Amministratore extends Utente {
 
     public Amministratore(String nome, String cognome, String email, String ruolo, String via, int civico, String citta, int cap) {
