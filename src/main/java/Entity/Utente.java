@@ -4,8 +4,9 @@ public abstract class Utente {
     private String nome;
     private String cognome;
     private  String email;
-    private Indirizzo indirizzo;
     private String ruolo;
+
+    private Indirizzo indirizzo;
 
     public Utente(String nome, String cognome, String email, String ruolo,String via, int civico, String citta, int cap) {
         this.nome = nome;

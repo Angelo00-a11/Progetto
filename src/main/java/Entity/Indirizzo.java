@@ -23,6 +23,11 @@ public class Indirizzo {
     public String getCitta() { return citta; }
     public int getCap() { return CAP; }
 
+    public void setVia(String via) {this.via = via;}
+    public void setNumeroCivico(int numeroCivico) {this.numeroCivico = numeroCivico;}
+    public void setCitta(String citta) {this.citta = citta;}
+    public void setCAP(int CAP) {this.CAP = CAP;}
+
     @Override
     public String toString() {
         return via + " " + numeroCivico + ", " + CAP + ", " + citta;

@@ -11,7 +11,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class FormOrdinazione {
-    private JPanel contentPane;
+    JPanel contentPane;
     private JButton indietroButton;
     private JButton confermaButton;
     private JTextField Piatto1;
@@ -126,6 +126,11 @@ public class FormOrdinazione {
         System.out.println(spinner);
 
     }*/
+
+    public void setNomeRistorante(String nomeRistorante) {
+        NomeRistorante.setText(nomeRistorante);
+    }
+
     private void SalvaOrdinazione() {
         String ristorante = NomeRistorante.getText();
         ArrayList<String> piatti = new ArrayList<String>();
@@ -159,18 +164,24 @@ public class FormOrdinazione {
     }
 
     private void VaiAHome() {
-        //qui va messo il codice per far ritornare l'uente alla schermata in cui deve scegliere tra i ristoranti
+        // Find the parent JFrame and dispose it
+        Window window = SwingUtilities.getWindowAncestor(contentPane);
+        if (window instanceof JFrame) {
+            ((JFrame) window).dispose();
+        }
     }
 
-    public static void main(String[] args) {
-        JFrame frameOrdinazione = new JFrame();
+    /*public static void main(String[] args) {
+
         FormOrdinazione formOrdinazione = new FormOrdinazione();
+        formOrdinazione.setNomeRistorante("Ristorante di Prova"); // Set restaurant name for testing
+        JFrame frameOrdinazione = new JFrame();
         frameOrdinazione.setTitle("Ordinazione");
         frameOrdinazione.setContentPane(formOrdinazione.contentPane);
-        frameOrdinazione.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frameOrdinazione.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frameOrdinazione.setResizable(false);
         frameOrdinazione.pack();
         frameOrdinazione.setLocationRelativeTo(null);
         frameOrdinazione.setVisible(true);
-    }
+    }*/
 }

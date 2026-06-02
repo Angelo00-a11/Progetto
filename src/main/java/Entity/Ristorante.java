@@ -7,19 +7,19 @@ public class Ristorante {
     private String nome;
     private StringBuilder descrizione;
     private Indirizzo indirizzoRistorante;
+
     private ArrayList<Data> orariApertura;
     private ArrayList<Piatto> Menu;
-
     private ArrayList<Ordine> ordiniRicevuti;
-
     private Ristoratore ristoratoreResponsabile;
 
-    public Ristorante(String nome, StringBuilder descrizione, String via, int civico, String citta, int cap, String giorno,int inizioServizio,int fineServizio){
+    public Ristorante(String nome, StringBuilder descrizione, String via, int civico, String citta, int cap, String giorno,int inizioServizio,int fineServizio, Ristoratore r){
         this.nome=nome;
         this.descrizione= new StringBuilder();
         this.indirizzoRistorante= new Indirizzo(via,civico,citta,cap);
         this.orariApertura=new ArrayList<>();
-        this.Menu=new ArrayList<>();
+        this.Menu=new ArrayList<Piatto>();
+        this.ristoratoreResponsabile=r;
     }
 
 
@@ -56,8 +56,7 @@ public class Ristorante {
         System.out.println(Menu);
     }
 
-
-
+    void modificaRistoratoreResponsabile(Ristoratore r){this.ristoratoreResponsabile=r;}
 
     void addOrariApertura(Data d){
         orariApertura.add(d);

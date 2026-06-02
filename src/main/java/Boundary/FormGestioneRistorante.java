@@ -1,17 +1,18 @@
 package Boundary;
 
-import Controller.OrdinazioneControllerStub;
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
 
 import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-public class FormGestioneMenu {
-    private JPanel contentPane;
+public class FormGestioneRistorante {
+    JPanel contentPane;
     private JPanel Header;
     private JPanel Body;
     private JPanel Footer;
@@ -77,11 +78,28 @@ public class FormGestioneMenu {
 
 
     //DA QUI IN POI è CODICE MIO
-    public FormGestioneMenu() {
+    public FormGestioneRistorante() {
+
         salvaButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 SalvaModifiche();
+            }
+        });
+
+        listPiatti.addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                if(!e.getValueIsAdjusting()){
+                    String piattoSelezionato = (String) listPiatti.getSelectedValue();
+                    if(piattoSelezionato != null){
+                        if(Database.Session.ruolo.equalsIgnoreCase("Ristoratore")){
+                            ModificaPiatto dialog = new ModificaPiatto();
+                            dialog.pack();
+                            dialog.setVisible(true);
+                        }
+                    }
+                }
             }
         });
     }
@@ -122,9 +140,9 @@ public class FormGestioneMenu {
         //qui va messo il codice per far ritornare l'uente alla schermata in cui deve scegliere tra i ristoranti
     }
 
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         JFrame frameGestioneMenu = new JFrame();
-        FormGestioneMenu formGestioneMenu = new FormGestioneMenu();
+        FormGestioneRistorante formGestioneMenu = new FormGestioneRistorante();
         frameGestioneMenu.setTitle("Menu");
         frameGestioneMenu.setContentPane(formGestioneMenu.contentPane);
         frameGestioneMenu.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -132,5 +150,5 @@ public class FormGestioneMenu {
         frameGestioneMenu.pack();
         frameGestioneMenu.setLocationRelativeTo(null);
         frameGestioneMenu.setVisible(true);
-    }
+    }*/
 }

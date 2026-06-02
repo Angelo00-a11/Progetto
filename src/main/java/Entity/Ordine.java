@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class Ordine {
     String statoOrdine;
 
+    Notifica notifica;
     Indirizzo indirizzoConsegna;
     Cliente cliente;
     ArrayList<RigaCarrelloVirtuale> carrello;

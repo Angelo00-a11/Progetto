@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 public class Amministratore extends Utente {
 
+    ArrayList<Ristorante> ristorantiConsiderati;
+    ArrayList<Ristorante> ordiniConsiderati;
     public Amministratore(String nome, String cognome, String email, String ruolo, String via, int civico, String citta, int cap) {
         super(nome, cognome, email, ruolo, via,civico,citta,cap);
     }
@@ -28,6 +30,18 @@ public class Amministratore extends Utente {
        // int tot_pagato=
         return tot_pagato/OrdiniConsiderati.size();
     }*/
+    /*public int GetTotOrdini(){
+        int res=0;
+        //
+        return res;
+    }
+
+    public ArrayList<Ristorante> GetTotOrdini(){
+        ArrayList<Ristorante> rist;
+        //
+        return rist;
+    }*/
+
 
 
 
