@@ -1,11 +1,30 @@
 package Entity;
 
+import jakarta.persistence.*;
+
+@Entity
 public class Indirizzo {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "idIndirizzo")
+    private Long id;
+
+    @Column(name = "via")
     private String via;
+
+    @Column(name = "numeroCivico")
     private int numeroCivico;
+
+    @Column(name = "citta")
     private String citta;
+
+    @Column(name = "cap")
     private int CAP;
+
+    // Costruttore senza parametri (richiesto da JPA)
+    public Indirizzo() {
+    }
 
     public Indirizzo(String via, int civico, String citta, int cap) {
         this.via = via;

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<persistence xmlns="https://jakarta.ee/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence
+                                 https://jakarta.ee/xml/ns/persistence/persistence_3_1.xsd"
+             version="3.1">
+
+    <!-- Questo valore dovrà coincidere con quello scritto all'interno del codice di JpaUtil
+         emf = Persistence.createEntityManagerFactory("fooddeliveryPU"); -->
+    <persistence-unit name="fooddeliveryPU">
+
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+
+        <!-- Inserire le entity del progetto -->
+        <class>Entity.Utente</class>
+        <class>Entity.Ristorante</class>
+        <class>Entity.Piatto</class>
+        <class>Entity.Ordine</class>
+        <class>Entity.Data</class>
+        <class>Entity.Notifica</class>
+        <class>Entity.Indirizzo</class>
+        <class>Entity.RigaCarrelloVirtuale</class>
+
+
+        <properties>
+
+            <property name="jakarta.persistence.jdbc.driver"
+                      value="com.mysql.cj.jdbc.Driver"/>
+
+            <!-- Sostituire con il tuo schema presente in MySQL -->
+            <property name="jakarta.persistence.jdbc.url"
+                      value="jdbc:mysql://127.0.0.1:3306/food_delivery"/>
+
+            <!-- Sostituire con la tua password di MySQL -->
+            <property name="jakarta.persistence.jdbc.user"
+                      value="root"/>
+
+            <property name="jakarta.persistence.jdbc.password"
+                      value="admin"/>
+
+            <property name="hibernate.hbm2ddl.auto"
+                      value="update"/>
+
+            <!-- Visualizza i log di hibernate su console se posta a "true" -->
+            <property name="hibernate.show_sql"
+                      value="true"/>
+
+            <property name="hibernate.format_sql"
+                      value="true"/>
+
+        </properties>
+
+    </persistence-unit>
+
+</persistence>

@@ -14,12 +14,12 @@ public class FormListaRistoranti {
     private Navigator navigator;
 
     public FormListaRistoranti(Navigator navigator) {
-        this.navigator=navigator;
+        this.navigator = navigator;
 
         ristorantiList.addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent e) {
-                if(!e.getValueIsAdjusting()){
+                if (!e.getValueIsAdjusting()) {
                     String ristoranteSelezionato = (String) ristorantiList.getSelectedValue();
                     if (ristoranteSelezionato != null) {
                         navigator.setNomeRistorante(ristoranteSelezionato);
@@ -48,14 +48,18 @@ public class FormListaRistoranti {
         contentPane = new JPanel();
         contentPane.setLayout(new GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), -1, -1));
         final JScrollPane scrollPane1 = new JScrollPane();
+        scrollPane1.setInheritsPopupMenu(true);
         contentPane.add(scrollPane1, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
         ristorantiList = new JList();
+        ristorantiList.setInheritsPopupMenu(false);
         final DefaultListModel defaultListModel1 = new DefaultListModel();
         defaultListModel1.addElement("Ristorante 1");
         defaultListModel1.addElement("Ristorante 2");
         defaultListModel1.addElement("Ristorante 3");
         defaultListModel1.addElement("Ristorante 4");
         ristorantiList.setModel(defaultListModel1);
+        ristorantiList.setValueIsAdjusting(false);
+        ristorantiList.putClientProperty("List.isFileList", Boolean.FALSE);
         scrollPane1.setViewportView(ristorantiList);
     }
 

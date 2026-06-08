@@ -1,5 +1,6 @@
 package Boundary;
 
+import Database.GestorePersistenza;
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
 
@@ -93,7 +94,7 @@ public class FormGestioneRistorante {
                 if(!e.getValueIsAdjusting()){
                     String piattoSelezionato = (String) listPiatti.getSelectedValue();
                     if(piattoSelezionato != null){
-                        if(Database.Session.ruolo.equalsIgnoreCase("Ristoratore")){
+                        if(Database.Session.getInstance().getUtenteLoggato() instanceof Entity.Ristoratore){
                             navigator.showModificaPiatto();
                         }
                     }

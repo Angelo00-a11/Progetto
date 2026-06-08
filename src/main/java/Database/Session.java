@@ -1,10 +1,39 @@
 package Database;
 
+import Entity.Utente;
+
 public class Session {
+    private static Session instance;
+    private Utente utenteLoggato;
+    private Long idClienteLoggato;
 
-    //mi serve giusto per salvare il ruolo e gestire l'interfaccia
-    public static String ruolo;
+    private Session() {
+    }
 
-    public String getRuolo() {return ruolo;}
-    public static void setRuolo(String ruolo) {Session.ruolo = ruolo;}
+    public static Session getInstance() {
+        if (instance == null) {
+            instance = new Session();
+        }
+        return instance;
+    }
+
+    public void setUtenteLoggato(Utente utente) {
+        this.utenteLoggato = utente;
+    }
+    public Utente getUtenteLoggato() {
+        return utenteLoggato;
+    }
+
+    public void setIdClienteLoggato(Long id) {
+        this.idClienteLoggato = id;
+    }
+    public Long getIdClienteLoggato() {
+        return idClienteLoggato;
+    }
+
+    public void logout() {
+        this.utenteLoggato = null;
+        this.idClienteLoggato = null;
+    }
 }
+

@@ -9,7 +9,6 @@ public class Navigator extends JFrame {
     private String nomeRistorante;
     private FormOrdinazione formOrdinazione;
 
-
     public Navigator(){
         layout = new CardLayout();
         container = new JPanel(layout);
@@ -31,22 +30,35 @@ public class Navigator extends JFrame {
         showHome();
     }
 
-    public void showHome(){layout.show(container, "HOME");}
+    public void showHome(){
+        setTitle("Home");
+        layout.show(container, "HOME");
+    }
     public void showListaRistoranti(){
+        setTitle("Lista Ristoranti");
         layout.show(container, "LISTA_RISTORANTI");
     }
     public void showGestioneRistorante(){
+        setTitle("Gestione Ristorante");
         layout.show(container, "GESTIONE_RISTORANTE");
     }
     public void showOrdinazione(){
-        formOrdinazione.setNomeRistorante();
+        setTitle("Ordinazione");
+        formOrdinazione.setNomeRistorante_e_POPUP();
         layout.show(container, "ORDINAZIONE");
     }
     public void showLogin(){
+        setTitle("Login");
         layout.show(container, "LOGIN");
     }
-    public void showRegister(){layout.show(container, "REGISTER");}
-    public void showModificaPiatto(){layout.show(container,"MODIFICA_PIATTO");}
+    public void showRegister(){
+        setTitle("Register");
+        layout.show(container, "REGISTER");
+    }
+    public void showModificaPiatto(){
+        setTitle("Modifica Piatto");
+        layout.show(container,"MODIFICA_PIATTO");
+    }
 
     public void setNomeRistorante(String nome) {
         this.nomeRistorante = nome;
