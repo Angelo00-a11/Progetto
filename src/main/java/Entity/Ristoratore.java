@@ -34,9 +34,7 @@ public class Ristoratore extends Utente {
         int res;
         if (this.getNome().equals(nome) && this.getCognome().equals(cognome) && this.getEmail().equals(email)) {
             res = 0;
-        } else {
-            res = -1;
-        }
+        } else {res = -1;}
         return res;
     }
 
@@ -51,6 +49,10 @@ public class Ristoratore extends Utente {
         if (ristorantiGestiti != null) {
             ristorantiGestiti.remove(r);
         }
+    }
+
+    public Ristorante creaRistorante(String nome, String descrizione, String via, String civico, String citta, int cap, String giorno, int inizioServizio, int fineServizio) {
+        return new Ristorante(nome, descrizione, via, civico, citta, cap, giorno, inizioServizio, fineServizio, this);
     }
 
 }

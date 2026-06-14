@@ -1,6 +1,5 @@
 package Controller;
 
-import Database.GestorePersistenza;
 import Database.Session;
 import Entity.*;
 

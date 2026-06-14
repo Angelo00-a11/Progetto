@@ -33,6 +33,8 @@ public class Indirizzo {
         this.citta = citta;
     }
 
+    public Long getId() {return id;}
+
     public String getVia() {
         return via;
     }

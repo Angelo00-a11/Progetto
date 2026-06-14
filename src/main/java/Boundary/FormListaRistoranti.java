@@ -1,5 +1,7 @@
 package Boundary;
 
+import Controller.ListaRistorantiController;
+import Entity.Ristorante;
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
 
@@ -7,14 +9,27 @@ import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import java.awt.*;
+import java.util.List;
 
 public class FormListaRistoranti {
     JPanel contentPane;
     private JList ristorantiList;
     private Navigator navigator;
 
+    public void caricaRistoranti() {
+        List<Ristorante> ristoranti = ListaRistorantiController.getRistoranti();
+        DefaultListModel<String> model = new DefaultListModel<>();
+        if (ristoranti != null) {
+            for (Ristorante r : ristoranti) {
+                model.addElement(r.getNome());
+            }
+        }
+        ristorantiList.setModel(model);
+    }
+
     public FormListaRistoranti(Navigator navigator) {
         this.navigator = navigator;
+        caricaRistoranti();
 
         ristorantiList.addListSelectionListener(new ListSelectionListener() {
             @Override
