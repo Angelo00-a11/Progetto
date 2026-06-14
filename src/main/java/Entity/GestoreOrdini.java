@@ -113,7 +113,25 @@ public class GestoreOrdini {
             piatto = gp.cercaPrimoPerCampi(Piatto.class, Map.of("nomePiatto", nomePiatto));
         }
         return piatto;
+        // da vedere se è giusto CREARLO
     }
 
-    // da vedere se è giusto CREARLO
+    //METODI PER IL MONITORAGGIO DELL'ORDINE
+
+    public List <Ordine> cercaOrdiniDelCliente(Long idCliente) {
+        if (idCliente == null) {
+            return null;
+        }
+        return gp.cercaPerCampo(Ordine.class, "id.Cliente", idCliente); //CERCA TUTTI GLI ORDINI ASSOCIATI AL CLIENTE CON ID "IDCLIENTE" INTERROGANDO IL GP
+    }
+
+    //dato un cliente, dato un ordine ne restituisce lo stato
+    public String cercaStatoOrdine(Long idCliente, Long idOrdine) {
+
+        Ordine ordine = gp.cercaPrimoPerCampi(Ordine.class, Map.of("id", idOrdine, "cliente.id", idCliente )  );
+        if (ordine == null) {
+            return null;
+        }
+        return ordine.getStatoOrdine();
+    }
 }
