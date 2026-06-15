@@ -11,6 +11,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Locale;
+import java.util.Map;
+import java.util.List;
 
 //import Controller.AmministratoreController;     //devo ancora farla
 
@@ -65,21 +67,21 @@ public class FormAmministratore {
                     "Errore Input", JOptionPane.WARNING_MESSAGE);
             return;
         }
-/*
+
         try { //chiamata al CONTROLLER --> NOTA: è lui che deve sistemare format stringa e passarla a LocalDate + validazione
             //chiamata metodo monitoraSistema
             Map<String, Object> statistiche = Controller.AmministratoreController.monitoraSistema(strDataInizio, strDataFine);
 
             //estrazione statistiche ottenute
             int totOrdini = (int) statistiche.get("totaleOrdini");
-            float volOrdini = (double) statistiche.get("volumeOrdini");
+            double volOrdini = (double) statistiche.get("volumeOrdini");
             List<Object[]> ristPiuAttivi = (List<Object[]>) statistiche.get("ristPiuAttivi");
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Errore durante l'elaborazione: " + ex.getMessage(),
                     "Errore di Sistema", JOptionPane.ERROR_MESSAGE);
         }
 
-*/
+
     }
 
     //metodo privato bottone terminaMonitoraggio
