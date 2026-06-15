@@ -1,5 +1,8 @@
 package Boundary;
 
+import Database.Session;
+import Entity.Cliente;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -8,7 +11,9 @@ public class Navigator extends JFrame {
     private JPanel container;
     private String nomeRistorante;
     private FormOrdinazione formOrdinazione;
+    private FormMonitoraOrdine formMonitoraOrdine;
     private FormListaRistoranti formListaRistoranti;
+
 
     public Navigator(){
         layout = new CardLayout();
@@ -20,10 +25,15 @@ public class Navigator extends JFrame {
         container.add(new FormGestioneRistorante(this).contentPane, "GESTIONE_RISTORANTE");
         formOrdinazione = new FormOrdinazione(this);
         container.add(formOrdinazione.contentPane, "ORDINAZIONE");
+
+        //formMonitoraOrdine = new FormMonitoraOrdine(this);
+        //container.add(formMonitoraOrdine.contentPane, "MONITORA_ORDINE");
+
         container.add(new Login(this).getContentPane(), "LOGIN");
         container.add(new Register(this).getContentPane(), "REGISTER");
         container.add(new ModificaPiatto(this).getContentPane(), "MODIFICA_PIATTO");
         //container.add(new FormAmministratore(this).contentPane, "MONITORA_SISTEMA");
+        container.add(formMonitoraOrdine.contentPane, "MONITORA_ORDINE");
 
         add(container);
         setSize(500, 400);
@@ -63,6 +73,11 @@ public class Navigator extends JFrame {
         setTitle("Modifica Piatto");
         layout.show(container,"MODIFICA_PIATTO");
     }
+    public void showMonitoraOrdine() {
+        setTitle("Monitora Ordine");
+        formMonitoraOrdine.caricaOrdiniCliente();
+        layout.show(container, "MONITORA_ORDINE");
+    }
     /*public void showMonitoraSistema(){
         setTitle("Gestione Sistema");
         layout.show(container, "MONITORA_SISTEMA");
@@ -75,13 +90,29 @@ public class Navigator extends JFrame {
         return nomeRistorante;
     }
 
-    // Metodo generico e ricorsivo per pulire i campi di qualsiasi pannello/form
+    public Cliente getClienteLoggato() {
+        if (Session.getInstance().getUtenteLoggato() instanceof Cliente cliente) {
+            return cliente;
+        }
+
+        return null;
+    }
+
+    public void logout() {
+        Session.getInstance().logout();
+        showHome();
+    }
+
     public static void clearFields(Container container) {
         if (container == null) return;
         for (Component c : container.getComponents()) {
-            if (c instanceof JTextField) ((JTextField) c).setText("");
-            else if (c instanceof JComboBox && ((JComboBox<?>) c).getItemCount() > 0) ((JComboBox<?>) c).setSelectedIndex(0);
-            else if (c instanceof Container) clearFields((Container) c);
+            if (c instanceof JTextField) {
+                ((JTextField) c).setText("");
+            } else if (c instanceof JComboBox && ((JComboBox<?>) c).getItemCount() > 0) {
+                ((JComboBox<?>) c).setSelectedIndex(0);
+            } else if (c instanceof Container) {
+                clearFields((Container) c);
+            }
         }
     }
 

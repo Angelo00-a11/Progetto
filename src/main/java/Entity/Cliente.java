@@ -1,6 +1,8 @@
 package Entity;
 
 import jakarta.persistence.*;
+
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -93,6 +95,7 @@ public class Cliente extends Utente {
         o.setStatoOrdine("inviato");
         // Associa il cliente all'ordine
         o.setCliente(this);
+        o.setData(LocalDate.now());
 
         if (this.ordiniEffettuati == null) {
             this.ordiniEffettuati = new ArrayList<>();

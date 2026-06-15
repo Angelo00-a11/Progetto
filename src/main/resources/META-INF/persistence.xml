@@ -33,14 +33,14 @@
 
             <!-- Sostituire con il tuo schema presente in MySQL -->
             <property name="jakarta.persistence.jdbc.url"
-                      value="jdbc:mysql://127.0.0.1:3306/food_delivery"/>
+                      value="jdbc:mysql://127.0.0.1:3306/prova"/>
 
             <!-- Sostituire con la tua password di MySQL -->
             <property name="jakarta.persistence.jdbc.user"
                       value="root"/>
 
             <property name="jakarta.persistence.jdbc.password"
-                      value="admin"/>
+                      value="Neroazzurri1@"/>
 
             <property name="hibernate.hbm2ddl.auto"
                       value="update"/>
