@@ -52,8 +52,8 @@
                     </constraints>
                     <properties>
                       <font style="2"/>
-                      <text value=""/>
-                      <toolTipText value=" gg/mm/aaaa"/>
+                      <text value="gg/mm/aaaa"/>
+                      <toolTipText value=""/>
                     </properties>
                   </component>
                   <component id="90cad" class="javax.swing.JLabel">
@@ -128,7 +128,7 @@
                 </constraints>
                 <properties>
                   <font size="18"/>
-                  <text value="123"/>
+                  <text value=""/>
                 </properties>
               </component>
               <component id="b1453" class="javax.swing.JLabel" binding="lblVolumeOrdini">
@@ -137,7 +137,7 @@
                 </constraints>
                 <properties>
                   <font size="18"/>
-                  <text value="456"/>
+                  <text value=""/>
                 </properties>
               </component>
               <vspacer id="c76ea">
