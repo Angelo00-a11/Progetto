@@ -14,7 +14,7 @@ public class Cliente extends Utente {
 
     // CORREZIONE: Relazione Cliente -> Ordine (lista ordiniEffettuati)
     // Usa mappedBy per indicare che la relazione è gestita dal campo 'cliente' in Entity.Ordine
-    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, fetch = FetchType.LAZY) // RIPRISTINATO QUI
+    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, fetch = FetchType.EAGER) // RIPRISTINATO QUI
     private List<Ordine> ordiniEffettuati;
 
     /*  - @JoinTable: Questa annotazione è obbligatoria per le relazioni @ManyToMany e definisce la tabella di join intermedia che gestisce la relazione nel database.
@@ -46,26 +46,21 @@ public class Cliente extends Utente {
         //this.ristorantiDisponibili = new ArrayList<>();
     }
 
-    // Rimosso getter/setter per il campo 'ordine' singolare
-    /*
-    public Ordine getOrdine() {
-        return ordine;
-    }
-    public void setOrdine(Ordine ordine) {
-        this.ordine = ordine;
-    }
-    */
-    public List<Ordine> getOrdiniEffettuati() {
-        return ordiniEffettuati;
+    public List<Ordine> getOrdiniEffettuati() {return ordiniEffettuati;}
+    public void setOrdiniEffettuati(List<Ordine> ordiniEffettuati) {this.ordiniEffettuati = ordiniEffettuati;}
+    public void addOrdineEffettuato(Ordine o){
+
+        if(ordiniEffettuati==null) {
+            this.ordiniEffettuati = new ArrayList<>();
+        }else{
+            this.ordiniEffettuati.add(o);
+        }
     }
 
-    public void setOrdiniEffettuati(List<Ordine> ordiniEffettuati) {
-        this.ordiniEffettuati = ordiniEffettuati;
-    }
-    /*public List<Ristorante> getRistorantiDisponibili() {
+    /*
+    public List<Ristorante> getRistorantiDisponibili() {
         return ristorantiDisponibili;
     }
-
     public void setRistorantiDisponibili(List<Ristorante> ristorantiDisponibili) {
         this.ristorantiDisponibili = ristorantiDisponibili;
     }*/
@@ -81,21 +76,28 @@ public class Cliente extends Utente {
         return res;
     }
 
-    private int CreaOrdine() {
-        //Implementazione specifica
-        //ArrayList<CarrelloVirtuale> cv =
-        //Ordine o=new Ordine("Creato",)
-        return 0;
+    public Ordine creaOrdine(ArrayList<RigaCarrelloVirtuale> carrello, Indirizzo indirizzoConsegna) {
+        //di default l'ordine viene creato con indirizzoConsegna, indirizzo (quello con cui si è registrato il Cliente)
+        Ordine o = new Ordine("Creato", this.getIndirizzo(), this);
+        o.setCarrello(carrello);
+
+        if(!indirizzoConsegna.equals(this.getIndirizzo())) {
+            o.setIndirizzoConsegna(indirizzoConsegna);
+        }
+
+        return o;
     }
 
-    public int Ordina(Ordine ordine) {
-        //Implementazione specifica
+    public void Ordina(Ordine o) {
 
-        ordine.setStatoOrdine("inviato");
+        o.setStatoOrdine("inviato");
+        // Associa il cliente all'ordine
+        o.setCliente(this);
+
         if (this.ordiniEffettuati == null) {
             this.ordiniEffettuati = new ArrayList<>();
         }
-        this.ordiniEffettuati.add(ordine);
-        return 0;
+        this.addOrdineEffettuato(o);
     }
+
 }

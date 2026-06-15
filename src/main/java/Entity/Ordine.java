@@ -77,6 +77,8 @@ public class Ordine {
 
     public Cliente getCliente() {return cliente;}
     public void setCliente(Cliente cliente) {this.cliente = cliente;}
+    //non dev'essere possibile cambiare il cliente che ha eseguito l'ordine
+    //eppure mi serve nel gestore ordini
 
     public List<RigaCarrelloVirtuale> getCarrello() {return carrello;}
     public void setCarrello(List<RigaCarrelloVirtuale> carrello) {this.carrello = carrello;}

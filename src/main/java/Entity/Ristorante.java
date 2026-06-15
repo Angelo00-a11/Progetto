@@ -127,34 +127,15 @@ public class Ristorante {
     }
 
     public void ModificaMenu(ArrayList<Piatto> p, int command) {
-        if (command == 1)
-            menu.addAll(p);
-        if (command == 2) {
-            menu.removeAll(p);
-        }
-        if (command == -1) {
-            menu.clear();
-        }
+        if (command == 1) {menu.addAll(p);}
+        if (command == 2) {menu.removeAll(p);}
+        if (command == -1) {menu.clear();}
     }
 
-    public void VisualizzaMenu() {
-        System.out.println(menu);
-    }
+    public void addOrariApertura(Data d) {orariApertura.add(d);}
 
-    public void modificaRistoratoreResponsabile(Ristoratore r) {
-        this.ristoratoreResponsabile = r;
-    }
+    public void removeOrariApertura(Data d) {orariApertura.remove(d);}
 
-    public void addOrariApertura(Data d) {
-        orariApertura.add(d);
-    }
-
-    public void removeOrariApertura(Data d) {
-        orariApertura.remove(d);
-    }
-
-    public void addOrdine_Ricevuti(Ordine o) {
-        ordiniRicevuti.add(o);
-    }
+    public void addOrdine_Ricevuti(Ordine o) {ordiniRicevuti.add(o);}
 
 }

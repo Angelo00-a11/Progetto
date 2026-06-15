@@ -8,13 +8,15 @@ public class Navigator extends JFrame {
     private JPanel container;
     private String nomeRistorante;
     private FormOrdinazione formOrdinazione;
+    private FormListaRistoranti formListaRistoranti;
 
     public Navigator(){
         layout = new CardLayout();
         container = new JPanel(layout);
 
         container.add(new FormHome(this).contentPane, "HOME");
-        container.add(new FormListaRistoranti(this).contentPane, "LISTA_RISTORANTI");
+        formListaRistoranti = new FormListaRistoranti(this);
+        container.add(formListaRistoranti.contentPane, "LISTA_RISTORANTI");
         container.add(new FormGestioneRistorante(this).contentPane, "GESTIONE_RISTORANTE");
         formOrdinazione = new FormOrdinazione(this);
         container.add(formOrdinazione.contentPane, "ORDINAZIONE");
@@ -36,6 +38,7 @@ public class Navigator extends JFrame {
     }
     public void showListaRistoranti(){
         setTitle("Lista Ristoranti");
+        formListaRistoranti.caricaRistoranti();
         layout.show(container, "LISTA_RISTORANTI");
     }
     public void showGestioneRistorante(){

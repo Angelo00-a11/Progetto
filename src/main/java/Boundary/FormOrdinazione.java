@@ -1,9 +1,9 @@
 package Boundary;
 
 import Controller.OrdinazioneControllerStub;
+import Controller.RegisterController;
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
-import com.intellij.uiDesigner.core.Spacer;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,6 +12,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class FormOrdinazione {
     JPanel contentPane;
@@ -30,9 +31,13 @@ public class FormOrdinazione {
     private JLabel NomeRistorante;
     private JLabel lblesito;
     private JTextField IndirizzotextField;
-    private JLabel lblIndirizzoConsegna;
     private JLabel lblPrezzo;
-    private JPanel IndirizzoJPanel;
+    private JComboBox tipoStradaComboBox;
+    private JTextField nCivicoTextField;
+    private JTextField viaTextField;
+    private JTextField cittaTextField;
+    private JTextField capTextField;
+    private JLabel indirizzoCosegnalbl;
 
     private final Navigator navigator;
 
@@ -47,7 +52,7 @@ public class FormOrdinazione {
     private void $$$setupUI$$$() {
         contentPane = new JPanel();
         contentPane.setLayout(new GridLayoutManager(4, 2, new Insets(0, 0, 0, 0), -1, -1));
-        contentPane.setPreferredSize(new Dimension(450, 300));
+        contentPane.setPreferredSize(new Dimension(800, 300));
         Header = new JPanel();
         Header.setLayout(new GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), -1, 2));
         contentPane.add(Header, new GridConstraints(0, 0, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
@@ -63,9 +68,9 @@ public class FormOrdinazione {
         Piatto1 = new JTextField();
         Piatto1.setEditable(false);
         Piatto1.setText("Piatto 1");
-        panel1.add(Piatto1, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_NORTH, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(262, 34), null, 0, false));
+        panel1.add(Piatto1, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_NORTHWEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(262, 34), null, 0, false));
         spinner1 = new JSpinner();
-        panel1.add(spinner1, new GridConstraints(0, 2, 1, 1, GridConstraints.ANCHOR_NORTHEAST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        panel1.add(spinner1, new GridConstraints(0, 2, 1, 1, GridConstraints.ANCHOR_NORTHWEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         lblPrezzo = new JLabel();
         lblPrezzo.setText("10.50");
         panel1.add(lblPrezzo, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
@@ -75,9 +80,9 @@ public class FormOrdinazione {
         Piatto2 = new JTextField();
         Piatto2.setEditable(false);
         Piatto2.setText("Piatto 2");
-        panel2.add(Piatto2, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_NORTH, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(262, 34), null, 0, false));
+        panel2.add(Piatto2, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_NORTHWEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(262, 34), null, 0, false));
         spinner2 = new JSpinner();
-        panel2.add(spinner2, new GridConstraints(0, 2, 1, 1, GridConstraints.ANCHOR_NORTHEAST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        panel2.add(spinner2, new GridConstraints(0, 2, 1, 1, GridConstraints.ANCHOR_NORTHWEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         final JLabel label1 = new JLabel();
         label1.setText("Label");
         panel2.add(label1, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
@@ -87,23 +92,60 @@ public class FormOrdinazione {
         Piatto3 = new JTextField();
         Piatto3.setEditable(false);
         Piatto3.setText("Piatto 3");
-        panel3.add(Piatto3, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_NORTH, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(262, 34), null, 0, false));
+        panel3.add(Piatto3, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_NORTHWEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(262, 34), null, 0, false));
         spinner3 = new JSpinner();
-        panel3.add(spinner3, new GridConstraints(0, 2, 1, 1, GridConstraints.ANCHOR_NORTHEAST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        panel3.add(spinner3, new GridConstraints(0, 2, 1, 1, GridConstraints.ANCHOR_NORTHWEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         final JLabel label2 = new JLabel();
         label2.setText("Label");
         panel3.add(label2, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        IndirizzoJPanel = new JPanel();
-        IndirizzoJPanel.setLayout(new GridLayoutManager(1, 2, new Insets(0, 0, 0, 0), -1, -1));
-        Body.add(IndirizzoJPanel, new GridConstraints(3, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
-        lblIndirizzoConsegna = new JLabel();
-        lblIndirizzoConsegna.setText("Indirizzo di Consegna:  Via");
-        IndirizzoJPanel.add(lblIndirizzoConsegna, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 1, false));
-        IndirizzotextField = new JTextField();
-        IndirizzoJPanel.add(IndirizzotextField, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 0, false));
         lblesito = new JLabel();
         lblesito.setText("EsitoInserimento");
         Body.add(lblesito, new GridConstraints(4, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        final JPanel panel4 = new JPanel();
+        panel4.setLayout(new GridLayoutManager(1, 6, new Insets(0, 0, 0, 0), -1, -1));
+        Body.add(panel4, new GridConstraints(3, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
+        indirizzoCosegnalbl = new JLabel();
+        indirizzoCosegnalbl.setText("Indirizzo di Cosegna");
+        panel4.add(indirizzoCosegnalbl, new GridConstraints(0, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        tipoStradaComboBox = new JComboBox();
+        final DefaultComboBoxModel defaultComboBoxModel1 = new DefaultComboBoxModel();
+        defaultComboBoxModel1.addElement("Via");
+        defaultComboBoxModel1.addElement("Viale");
+        defaultComboBoxModel1.addElement("Piazza");
+        defaultComboBoxModel1.addElement("Corso");
+        defaultComboBoxModel1.addElement("Vicolo");
+        defaultComboBoxModel1.addElement("Piazzale");
+        defaultComboBoxModel1.addElement("Largo");
+        defaultComboBoxModel1.addElement("Piazzetta");
+        defaultComboBoxModel1.addElement("Vico");
+        defaultComboBoxModel1.addElement("Vicoletto");
+        defaultComboBoxModel1.addElement("Stradone");
+        defaultComboBoxModel1.addElement("Salita");
+        defaultComboBoxModel1.addElement("Contrada");
+        defaultComboBoxModel1.addElement("Strada");
+        defaultComboBoxModel1.addElement("Strada Comunale");
+        defaultComboBoxModel1.addElement("Strada Provinciale");
+        defaultComboBoxModel1.addElement("Traversa");
+        defaultComboBoxModel1.addElement("Località");
+        defaultComboBoxModel1.addElement("Borgo");
+        defaultComboBoxModel1.addElement("Vialetto");
+        defaultComboBoxModel1.addElement("Calle");
+        defaultComboBoxModel1.addElement("Fondamenta");
+        defaultComboBoxModel1.addElement("Sestiere");
+        tipoStradaComboBox.setModel(defaultComboBoxModel1);
+        panel4.add(tipoStradaComboBox, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(50, -1), null, 2, false));
+        nCivicoTextField = new JTextField();
+        nCivicoTextField.setColumns(50);
+        panel4.add(nCivicoTextField, new GridConstraints(0, 3, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(25, -1), null, 0, false));
+        viaTextField = new JTextField();
+        viaTextField.setColumns(20);
+        viaTextField.setText("");
+        viaTextField.setToolTipText("");
+        panel4.add(viaTextField, new GridConstraints(0, 2, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 2, false));
+        cittaTextField = new JTextField();
+        panel4.add(cittaTextField, new GridConstraints(0, 5, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(50, -1), null, 0, false));
+        capTextField = new JTextField();
+        panel4.add(capTextField, new GridConstraints(0, 4, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(50, -1), null, 0, false));
         Footer = new JPanel();
         Footer.setLayout(new GridLayoutManager(1, 2, new Insets(0, 0, 0, 0), -1, -1));
         contentPane.add(Footer, new GridConstraints(3, 0, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
@@ -180,7 +222,15 @@ public class FormOrdinazione {
 
     private void SalvaOrdinazione() {
         String ristorante = NomeRistorante.getText();
-        String indirizzo = IndirizzotextField.getText();
+
+        String tipo = Objects.requireNonNull(tipoStradaComboBox.getSelectedItem()).toString();
+        String via = tipo + " " + viaTextField.getText();
+        String civico = nCivicoTextField.getText();
+        String cap = capTextField.getText();
+        String citta = cittaTextField.getText();
+
+        String indirizzo = via + " " + civico + " " + cap + " " + citta;
+
 
         ArrayList<String> piatti = new ArrayList<String>();
         ArrayList<Integer> quantita = new ArrayList<Integer>();
@@ -198,8 +248,8 @@ public class FormOrdinazione {
                     if ((int) quantita_.getValue() < 0) {
                         JOptionPane.showMessageDialog(null, "Inserire una quantità valida");
                         flag = true;
-                    } else if (IndirizzotextField.getText().isEmpty()) {
-                        JOptionPane.showMessageDialog(null, "Inserire un indirizzo di consegna");
+                    } else if (indirizzo.isBlank()) {
+                        JOptionPane.showMessageDialog(null, "Inserire un indirizzo di consegna completo");
                         flag = true;
                     } else if ((int) quantita_.getValue() > 0) {
                         quantita.add((Integer) quantita_.getValue());
@@ -217,10 +267,10 @@ public class FormOrdinazione {
             return;
         }
 
-        SalvaOrdinazioneAsync(piatti, quantita, indirizzo);
+        SalvaOrdinazioneAsync(piatti, quantita, via, civico, cap, citta);
     }
 
-    private void SalvaOrdinazioneAsync(ArrayList<String> piatti, ArrayList<Integer> quantita, String indirizzo) {
+    private void SalvaOrdinazioneAsync(ArrayList<String> piatti, ArrayList<Integer> quantita, String via, String civico, String cap, String citta) {
         confermaButton.setEnabled(false);
         lblesito.setText("Salvataggio in corso...");
         lblesito.setForeground(Color.BLACK);
@@ -228,7 +278,7 @@ public class FormOrdinazione {
         SwingWorker<Boolean, Void> worker = new SwingWorker<Boolean, Void>() {
             @Override
             protected Boolean doInBackground() {
-                return OrdinazioneControllerStub.salvaOrdinazione(piatti, quantita, indirizzo);
+                return OrdinazioneControllerStub.salvaOrdinazione(piatti, quantita, via, civico, cap, citta);
             }
 
             @Override

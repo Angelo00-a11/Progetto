@@ -94,7 +94,6 @@ public class Register extends JDialog {
     }
 
 
-
     private void onCancel() {
         Navigator.clearFields(contentPane);
         lblesito.setText("EsitoInserimento");
