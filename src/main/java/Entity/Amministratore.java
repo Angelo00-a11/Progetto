@@ -3,8 +3,6 @@ package Entity;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -14,23 +12,6 @@ import java.util.Map;
 @Entity
 @DiscriminatorValue("AMMINISTRATORE")
 public class Amministratore extends Utente {
-/*      NON MI SERVONO COME ATTRIBUTI, uso List<Ristorante> come variabile locale in monitoraSistema
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(
-        name = "amministratore_ristorante",
-        joinColumns = @JoinColumn(name = "idAmministratore"),
-        inverseJoinColumns = @JoinColumn(name = "id_Ristorante")
-    )
-    private List<Ristorante> ristorantiConsiderati;
-
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(
-        name = "amministratore_ordine",
-        joinColumns = @JoinColumn(name = "idAmministratore"),
-        inverseJoinColumns = @JoinColumn(name = "idOrdine")
-    )
-    private List<Ordine> ordiniConsiderati;
-*/
 
     // Costruttore senza parametri (richiesto da JPA)
     public Amministratore() {
@@ -40,21 +21,6 @@ public class Amministratore extends Utente {
     public Amministratore(String nome, String cognome, String email, String ruolo, String via, String civico, String citta, int cap) {
         super(nome, cognome, email, ruolo, via, civico, cap, citta);
     }
-
-/*      NON SERVE
-    public List<Ristorante> getRistorantiConsiderati() {
-        return ristorantiConsiderati;
-    }
-    public void setRistorantiConsiderati(List<Ristorante> ristorantiConsiderati) {
-        this.ristorantiConsiderati = ristorantiConsiderati;
-    }
-    public List<Ordine> getOrdiniConsiderati() {
-        return ordiniConsiderati;
-    }
-    public void setOrdiniConsiderati(List<Ordine> ordiniConsiderati) {
-        this.ordiniConsiderati = ordiniConsiderati;
-    }
-*/
 
     @Override
     public int Accedi(String nome, String cognome, String email) {
@@ -71,10 +37,7 @@ public class Amministratore extends Utente {
     // ********************************
     //  METODO PUBLIC MONITORA SISTEMA
     // ********************************
-    public Map<String, Object> monitoraSistema(LocalDate dataInizio, LocalDate dataFine){
-
-        //recupera la lista di ristoranti da considerare
-        List<Ristorante> ristoranti = this.recpueraRistoranti(dataInizio, dataFine);
+    public Map<String, Object> monitoraSistema(List<Ristorante> ristoranti, LocalDate dataInizio, LocalDate dataFine){
 
         //calcola le statistiche
         int totOrdini = this.calcoloTotaleOrdini(ristoranti, dataInizio, dataFine);
@@ -94,13 +57,6 @@ public class Amministratore extends Utente {
     // ****************************
     //  METODI PRIVATI DI UTILITA'
     // ****************************
-
-    //INPUT: intervallo di date - OUTPUT: lista di ristoranti che hanno evaso almeno un ordine nel periodo
-    private List<Ristorante> recpueraRistoranti(LocalDate dataInizio, LocalDate dataFine) {
-        // da implementare --> vedi come interagire con DB --> INIZIA A LAVORARE SUL CONTROLLER !
-
-        return new ArrayList<>();
-    }
 
     //INPUT: lista ristoranti e intervallo di date - OUTPUT: totale ordini nel periodo
     private int calcoloTotaleOrdini(List<Ristorante> ristoranti, LocalDate dataInizio, LocalDate dataFine) {
@@ -150,12 +106,14 @@ public class Amministratore extends Utente {
     }
 
     //INPUT: ristorante e intervallo di date - OUTPUT: lista di ordini nel periodo (del singolo ristorante)
+    // NOTA: il metodo viene chiamato più volte per i calcoli statistici (problema non rilevante nel contesto attuale)
+    //       una possibile ottimizzazione è una cache in monitoraSistema del tipo Map<Ristorante, List<Ordine>> ordiniFiltrati
     private List<Ordine> recuperaOrdini(Ristorante ristorante, LocalDate dataInizio, LocalDate dataFine){
         List<Ordine> daConsiderare = new ArrayList<>();
         for(Ordine o : ristorante.getOrdiniRicevuti()){
-           // LocalDate dataOrdine = o.getData();     //NOTA: VEDERE COME RISOLVERE IL PROBLEMA / IMPLEMENTARE GET
-            boolean nelPeriodo = !dataOrdine.isAfter(dataInizio) && !dataOrdine.isBefore(dataFine);
-            boolean evaso = o.getStatoOrdine().equals("evaso");      //NOTA: VERIFICARE STRINGA ESATTA PER STATO EVASO
+            LocalDate dataOrdine = o.getData();
+            boolean nelPeriodo = !dataOrdine.isBefore(dataInizio) && !dataOrdine.isAfter(dataFine);
+            boolean evaso = "evaso".equalsIgnoreCase(o.getStatoOrdine());
             if (nelPeriodo && evaso){
                 daConsiderare.add(o);
             }
@@ -166,9 +124,6 @@ public class Amministratore extends Utente {
 
 }
 
-/*
- ********** LA NOTA LA LASCIO O LA CANCELLO? **********
-*/
 
 // NOTA ARCHITETTURALE — Consistenza dei dati durante il monitoraggio
 // In un sistema multi-thread o multi-utente, i tre calcoli successivi al monitoraSistema (totaleOrdini, volumeMedio,
