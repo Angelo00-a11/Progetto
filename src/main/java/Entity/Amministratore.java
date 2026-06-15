@@ -98,6 +98,8 @@ public class Amministratore extends Utente {
     //INPUT: intervallo di date - OUTPUT: lista di ristoranti che hanno evaso almeno un ordine nel periodo
     private List<Ristorante> recpueraRistoranti(LocalDate dataInizio, LocalDate dataFine) {
         // da implementare --> vedi come interagire con DB --> INIZIA A LAVORARE SUL CONTROLLER !
+
+        return new ArrayList<>();
     }
 
     //INPUT: lista ristoranti e intervallo di date - OUTPUT: totale ordini nel periodo
@@ -151,7 +153,7 @@ public class Amministratore extends Utente {
     private List<Ordine> recuperaOrdini(Ristorante ristorante, LocalDate dataInizio, LocalDate dataFine){
         List<Ordine> daConsiderare = new ArrayList<>();
         for(Ordine o : ristorante.getOrdiniRicevuti()){
-            LocalDate dataOrdine = o.getData();     //NOTA: VEDERE COME RISOLVERE IL PROBLEMA / IMPLEMENTARE GET
+           // LocalDate dataOrdine = o.getData();     //NOTA: VEDERE COME RISOLVERE IL PROBLEMA / IMPLEMENTARE GET
             boolean nelPeriodo = !dataOrdine.isAfter(dataInizio) && !dataOrdine.isBefore(dataFine);
             boolean evaso = o.getStatoOrdine().equals("evaso");      //NOTA: VERIFICARE STRINGA ESATTA PER STATO EVASO
             if (nelPeriodo && evaso){
