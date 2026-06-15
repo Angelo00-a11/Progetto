@@ -27,7 +27,7 @@ public class Ristorante {
     @JoinColumn(name = "ristorante_id")
     private List<Data> orariApertura;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "ristorante_id")
     private List<Piatto> menu;
 

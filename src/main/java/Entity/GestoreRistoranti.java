@@ -36,7 +36,7 @@ public class GestoreRistoranti {
         }
     }
 
-    // Logic di ristoranti che si rendono disponibili non esplicita nella traccia
+    // Logica di ristoranti che si rendono disponibili non esplicita nella traccia
     // li ritorno tutti
     public List<Ristorante> getRistoranti() {
         return gp.cercaPerCampi(Ristorante.class, Map.of());

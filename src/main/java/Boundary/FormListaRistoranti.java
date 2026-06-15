@@ -16,12 +16,13 @@ public class FormListaRistoranti {
     private JList ristorantiList;
     private JButton btnMonitora;
     private Navigator navigator;
+    private List<Ristorante> ristorantiCaricati;
 
     public void caricaRistoranti() {
-        List<Ristorante> ristoranti = ListaRistorantiController.getRistoranti();
+        ristorantiCaricati = ListaRistorantiController.getRistoranti();
         DefaultListModel<String> model = new DefaultListModel<>();
-        if (ristoranti != null) {
-            for (Ristorante r : ristoranti) {
+        if (ristorantiCaricati != null) {
+            for (Ristorante r : ristorantiCaricati) {
                 model.addElement(r.getNome());
             }
         }
@@ -36,9 +37,12 @@ public class FormListaRistoranti {
             @Override
             public void valueChanged(ListSelectionEvent e) {
                 if (!e.getValueIsAdjusting()) {
-                    String ristoranteSelezionato = (String) ristorantiList.getSelectedValue();
-                    if (ristoranteSelezionato != null) {
-                        navigator.setNomeRistorante(ristoranteSelezionato);
+                    int indice = ristorantiList.getSelectedIndex();
+                    if (indice >= 0 && ristorantiCaricati != null) {
+                        Ristorante ristoranteSelezionato = ristorantiCaricati.get(indice);
+                        navigator.setRistoranteSelezionato(ristoranteSelezionato);
+                        navigator.setNomeRistorante(ristoranteSelezionato.getNome());
+                        ristorantiList.clearSelection();
                         navigator.showOrdinazione();
                     }
                 }

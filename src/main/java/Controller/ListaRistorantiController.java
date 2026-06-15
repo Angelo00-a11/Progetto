@@ -11,4 +11,5 @@ public class ListaRistorantiController {
         GestoreRistoranti gestoreRistoranti = new GestoreRistoranti();
         return gestoreRistoranti.getRistoranti();
     }
+
 }
