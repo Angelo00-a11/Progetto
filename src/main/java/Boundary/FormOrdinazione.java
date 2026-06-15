@@ -2,6 +2,8 @@ package Boundary;
 
 import Controller.OrdinazioneControllerStub;
 import Controller.RegisterController;
+import Entity.Piatto;
+import Entity.Ristorante;
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
 
@@ -12,6 +14,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class FormOrdinazione {
@@ -52,7 +55,7 @@ public class FormOrdinazione {
     private void $$$setupUI$$$() {
         contentPane = new JPanel();
         contentPane.setLayout(new GridLayoutManager(4, 2, new Insets(0, 0, 0, 0), -1, -1));
-        contentPane.setPreferredSize(new Dimension(800, 300));
+        contentPane.setPreferredSize(new Dimension(1000, 300));
         Header = new JPanel();
         Header.setLayout(new GridLayoutManager(1, 1, new Insets(0, 0, 0, 0), -1, 2));
         contentPane.add(Header, new GridConstraints(0, 0, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
@@ -98,9 +101,6 @@ public class FormOrdinazione {
         final JLabel label2 = new JLabel();
         label2.setText("Label");
         panel3.add(label2, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
-        lblesito = new JLabel();
-        lblesito.setText("EsitoInserimento");
-        Body.add(lblesito, new GridConstraints(4, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         final JPanel panel4 = new JPanel();
         panel4.setLayout(new GridLayoutManager(1, 6, new Insets(0, 0, 0, 0), -1, -1));
         Body.add(panel4, new GridConstraints(3, 0, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
@@ -136,16 +136,22 @@ public class FormOrdinazione {
         panel4.add(tipoStradaComboBox, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(50, -1), null, 2, false));
         nCivicoTextField = new JTextField();
         nCivicoTextField.setColumns(50);
+        nCivicoTextField.setToolTipText("Inserisci il numero Civico");
         panel4.add(nCivicoTextField, new GridConstraints(0, 3, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(25, -1), null, 0, false));
         viaTextField = new JTextField();
         viaTextField.setColumns(20);
         viaTextField.setText("");
-        viaTextField.setToolTipText("");
+        viaTextField.setToolTipText("Inserisci il nome della via");
         panel4.add(viaTextField, new GridConstraints(0, 2, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(150, -1), null, 2, false));
         cittaTextField = new JTextField();
+        cittaTextField.setToolTipText("Inserisci la Città");
         panel4.add(cittaTextField, new GridConstraints(0, 5, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(50, -1), null, 0, false));
         capTextField = new JTextField();
+        capTextField.setToolTipText("Inserisi il CAP");
         panel4.add(capTextField, new GridConstraints(0, 4, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, new Dimension(50, -1), null, 0, false));
+        lblesito = new JLabel();
+        lblesito.setText("EsitoInserimento");
+        Body.add(lblesito, new GridConstraints(4, 0, 1, 1, GridConstraints.ANCHOR_WEST, GridConstraints.FILL_NONE, GridConstraints.SIZEPOLICY_FIXED, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
         Footer = new JPanel();
         Footer.setLayout(new GridLayoutManager(1, 2, new Insets(0, 0, 0, 0), -1, -1));
         contentPane.add(Footer, new GridConstraints(3, 0, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_BOTH, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
@@ -191,7 +197,64 @@ public class FormOrdinazione {
 
     public void setNomeRistorante_e_POPUP() {
         NomeRistorante.setText(navigator.getNomeRistorante());
+        caricaMenuRistorante();
         setupPiattiListeners();
+    }
+
+    private void caricaMenuRistorante() {
+        Ristorante ristorante = navigator.getRistoranteSelezionato();
+        if (ristorante == null || ristorante.getMenu() == null) {
+            return;
+        }
+
+        Component indirizzoPanel = null;
+        for (int i = 0; i < Body.getComponentCount(); i++) {
+            Component c = Body.getComponent(i);
+            if (c instanceof JPanel panel && contieneComponente(panel, indirizzoCosegnalbl)) {
+                indirizzoPanel = c;
+                break;
+            }
+        }
+
+        List<Piatto> menu = ristorante.getMenu();
+        Body.removeAll();
+        Body.setLayout(new BoxLayout(Body, BoxLayout.Y_AXIS));
+
+        for (int i = 0; i < menu.size(); i++) {
+            Piatto piatto = menu.get(i);
+            JPanel rigaMenu = new JPanel();
+            rigaMenu.setLayout(new FlowLayout(FlowLayout.LEFT));
+
+            JTextField textPiatto = new JTextField(piatto.getNomePiatto());
+            textPiatto.setEditable(false);
+            textPiatto.setPreferredSize(new Dimension(262, 34));
+            textPiatto.putClientProperty("descrizione", piatto.getDescrizione());
+            JLabel lblPrezzo = new JLabel(piatto.getPrezzo() + " €");
+            lblPrezzo.setPreferredSize(new Dimension(60, 34));
+            JSpinner quantita = new JSpinner(new SpinnerNumberModel(0, 0, 99, 1));
+
+            rigaMenu.add(textPiatto);
+            rigaMenu.add(lblPrezzo);
+            rigaMenu.add(quantita);
+            Body.add(rigaMenu);
+        }
+
+        if (indirizzoPanel != null) {
+            Body.add(indirizzoPanel);
+        }
+        Body.add(lblesito);
+
+        Body.revalidate();
+        Body.repaint();
+    }
+
+    private boolean contieneComponente(Container container, Component cercato) {
+        for (Component c : container.getComponents()) {
+            if (c == cercato || c instanceof Container child && contieneComponente(child, cercato)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private void setupPiattiListeners() {
@@ -213,7 +276,10 @@ public class FormOrdinazione {
             @Override
             public void mouseClicked(MouseEvent e) {
                 String nomePiatto = piattoField.getText();
-                String descrizione = "Descrizione di: " + nomePiatto;
+                String descrizione = (String) piattoField.getClientProperty("descrizione");
+                if (descrizione == null || descrizione.isBlank()) {
+                    descrizione = "Descrizione non disponibile";
+                }
                 JOptionPane.showMessageDialog(contentPane, descrizione, nomePiatto, JOptionPane.INFORMATION_MESSAGE);
             }
         });
@@ -242,8 +308,8 @@ public class FormOrdinazione {
             Component c = Body.getComponent(i);
             if (c instanceof JPanel rigamenu) {
                 if (rigamenu.getComponentCount() > 0 && rigamenu.getComponent(0) instanceof JTextField piatto) {
-                    JSpinner quantita_ = (JSpinner) rigamenu.getComponent(1);
-                    JLabel prezzo = (JLabel) rigamenu.getComponent(2);
+                    JLabel prezzo = (JLabel) rigamenu.getComponent(1);
+                    JSpinner quantita_ = (JSpinner) rigamenu.getComponent(2);
 
                     if ((int) quantita_.getValue() < 0) {
                         JOptionPane.showMessageDialog(null, "Inserire una quantità valida");
@@ -254,7 +320,7 @@ public class FormOrdinazione {
                     } else if ((int) quantita_.getValue() > 0) {
                         quantita.add((Integer) quantita_.getValue());
 
-                        prezzi.add(Float.parseFloat(prezzo.getText()));
+                        prezzi.add(Float.parseFloat(prezzo.getText().replace("€", "").trim()));
                         piatti.add(piatto.getText());
                     }
                 }

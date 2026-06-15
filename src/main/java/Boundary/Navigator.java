@@ -1,7 +1,9 @@
 package Boundary;
 
+import Boundary.FormMonitoraOrdine.FormMonitoraOrdine;
 import Database.Session;
 import Entity.Cliente;
+import Entity.Ristorante;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,6 +12,7 @@ public class Navigator extends JFrame {
     private CardLayout layout;
     private JPanel container;
     private String nomeRistorante;
+    private Ristorante ristoranteSelezionato;
     private FormOrdinazione formOrdinazione;
     private FormMonitoraOrdine formMonitoraOrdine;
     private FormListaRistoranti formListaRistoranti;
@@ -27,15 +30,14 @@ public class Navigator extends JFrame {
         formOrdinazione = new FormOrdinazione(this);
         container.add(formOrdinazione.contentPane, "ORDINAZIONE");
 
-        //formMonitoraOrdine = new FormMonitoraOrdine(this);
-        //container.add(formMonitoraOrdine.contentPane, "MONITORA_ORDINE");
+        formMonitoraOrdine = new FormMonitoraOrdine(this);
+        container.add(formMonitoraOrdine.contentPane, "MONITORA_ORDINE");
 
         container.add(new Login(this).getContentPane(), "LOGIN");
         container.add(new Register(this).getContentPane(), "REGISTER");
         container.add(new ModificaPiatto(this).getContentPane(), "MODIFICA_PIATTO");
         formAmministratore = new FormAmministratore(this);
         container.add(formAmministratore.contentPane, "MONITORA_SISTEMA");
-        //container.add(new FormAmministratore(this).contentPane, "MONITORA_SISTEMA");
         container.add(formMonitoraOrdine.contentPane, "MONITORA_ORDINE");
         container.add(new FormGestisciOrdine(this).getContentPane(), "GESTISCI_ORDINE");
 
@@ -47,35 +49,41 @@ public class Navigator extends JFrame {
         showHome();
     }
 
-    public void showHome(){
+    public void showHome() {
         setTitle("Home");
         layout.show(container, "HOME");
     }
-    public void showListaRistoranti(){
+
+    public void showListaRistoranti() {
         setTitle("Lista Ristoranti");
         formListaRistoranti.caricaRistoranti();
         layout.show(container, "LISTA_RISTORANTI");
     }
-    public void showGestioneRistorante(){
+
+    public void showGestioneRistorante() {
         setTitle("Gestione Ristorante");
         layout.show(container, "GESTIONE_RISTORANTE");
     }
-    public void showOrdinazione(){
+
+    public void showOrdinazione() {
         setTitle("Ordinazione");
         formOrdinazione.setNomeRistorante_e_POPUP();
         layout.show(container, "ORDINAZIONE");
     }
-    public void showLogin(){
+
+    public void showLogin() {
         setTitle("Login");
         layout.show(container, "LOGIN");
     }
-    public void showRegister(){
+
+    public void showRegister() {
         setTitle("Register");
         layout.show(container, "REGISTER");
     }
-    public void showModificaPiatto(){
+
+    public void showModificaPiatto() {
         setTitle("Modifica Piatto");
-        layout.show(container,"MODIFICA_PIATTO");
+        layout.show(container, "MODIFICA_PIATTO");
     }
     public void showMonitoraSistema() {
         setTitle("Monitoraggio Sistema");
@@ -96,6 +104,7 @@ public class Navigator extends JFrame {
         setTitle("Gestione Sistema");
         layout.show(container, "MONITORA_SISTEMA");
     }
+
     public void setNomeRistorante(String nome) {
         this.nomeRistorante = nome;
     }
@@ -104,11 +113,18 @@ public class Navigator extends JFrame {
         return nomeRistorante;
     }
 
+    public void setRistoranteSelezionato(Ristorante ristoranteSelezionato) {
+        this.ristoranteSelezionato = ristoranteSelezionato;
+    }
+
+    public Ristorante getRistoranteSelezionato() {
+        return ristoranteSelezionato;
+    }
+
     public Cliente getClienteLoggato() {
         if (Session.getInstance().getUtenteLoggato() instanceof Cliente cliente) {
             return cliente;
         }
-
         return null;
     }
 
@@ -118,7 +134,8 @@ public class Navigator extends JFrame {
     }
 
     public static void clearFields(Container container) {
-        if (container == null) return;
+        if (container == null)
+            return;
         for (Component c : container.getComponents()) {
             if (c instanceof JTextField) {
                 ((JTextField) c).setText("");
@@ -131,6 +148,8 @@ public class Navigator extends JFrame {
     }
 
     public static void main(String[] args) {
+        Database.JpaUtil.getInstance().inizializzaDatiSeVuoto();// per inizializzare il DB con valori di prova, non fa
+                                                                // parte del dominio
         SwingUtilities.invokeLater(Navigator::new);
     }
 }
