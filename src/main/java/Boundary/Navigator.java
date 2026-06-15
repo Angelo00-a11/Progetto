@@ -14,6 +14,7 @@ public class Navigator extends JFrame {
     private FormMonitoraOrdine formMonitoraOrdine;
     private FormListaRistoranti formListaRistoranti;
     private FormAmministratore formAmministratore;
+    private FormGestisciOrdine formGestisciOrdine;
 
     public Navigator(){
         layout = new CardLayout();
@@ -36,6 +37,7 @@ public class Navigator extends JFrame {
         container.add(formAmministratore.contentPane, "MONITORA_SISTEMA");
         //container.add(new FormAmministratore(this).contentPane, "MONITORA_SISTEMA");
         container.add(formMonitoraOrdine.contentPane, "MONITORA_ORDINE");
+        container.add(new FormGestisciOrdine(this).getContentPane(), "GESTISCI_ORDINE");
 
         add(container);
         setSize(500, 400);
@@ -75,13 +77,21 @@ public class Navigator extends JFrame {
         setTitle("Modifica Piatto");
         layout.show(container,"MODIFICA_PIATTO");
     }
-    public void showMonitoraSistema(){
+    public void showMonitoraSistema() {
         setTitle("Monitoraggio Sistema");
+    }
+
     public void showMonitoraOrdine() {
         setTitle("Monitora Ordine");
         formMonitoraOrdine.caricaOrdiniCliente();
         layout.show(container, "MONITORA_ORDINE");
     }
+
+    public void showGestisciOrdine() {
+        setTitle("Lista Ordini Ricevuti");
+        layout.show(container, "GESTISCI_ORDINE");
+    }
+
     /*public void showMonitoraSistema(){
         setTitle("Gestione Sistema");
         layout.show(container, "MONITORA_SISTEMA");
