@@ -1,6 +1,8 @@
 package Entity;
 
 import jakarta.persistence.*;
+
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,6 +54,11 @@ public class Ordine {
     @OneToMany(mappedBy = "ordine", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<RigaCarrelloVirtuale> carrello;
 
+
+    @Column(name = "data")
+    private LocalDate data;
+
+
     // Costruttore senza parametri (richiesto da JPA)
     public Ordine() {
     }
@@ -79,6 +86,16 @@ public class Ordine {
     public void setCliente(Cliente cliente) {this.cliente = cliente;}
     //non dev'essere possibile cambiare il cliente che ha eseguito l'ordine
     //eppure mi serve nel gestore ordini
+
+    public LocalDate getData()
+    {
+        return data;
+    }
+
+    public void setData(LocalDate data)
+    {
+        this.data = data;
+    }
 
     public List<RigaCarrelloVirtuale> getCarrello() {return carrello;}
     public void setCarrello(List<RigaCarrelloVirtuale> carrello) {this.carrello = carrello;}

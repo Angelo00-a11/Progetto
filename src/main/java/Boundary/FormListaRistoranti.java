@@ -14,7 +14,7 @@ import java.util.List;
 public class FormListaRistoranti {
     JPanel contentPane;
     private JList ristorantiList;
-    private JButton btnMonitoraOrdine;
+    private JButton btnMonitora;
     private Navigator navigator;
 
     public void caricaRistoranti() {
@@ -44,7 +44,8 @@ public class FormListaRistoranti {
                 }
             }
         });
-        btnMonitoraOrdine.addActionListener(e -> navigator.showMonitoraOrdine());
+
+        btnMonitora.addActionListener(e -> navigator.showMonitoraOrdine());
     }
 
     {
@@ -78,9 +79,9 @@ public class FormListaRistoranti {
         ristorantiList.setValueIsAdjusting(false);
         ristorantiList.putClientProperty("List.isFileList", Boolean.FALSE);
         scrollPane1.setViewportView(ristorantiList);
-        btnMonitoraOrdine = new JButton();
-        btnMonitoraOrdine.setText("Monitora Ordine");
-        contentPane.add(btnMonitoraOrdine, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+        btnMonitora = new JButton();
+        btnMonitora.setText("Monitora Ordine");
+        contentPane.add(btnMonitora, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
     }
 
     /**
