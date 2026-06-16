@@ -51,7 +51,7 @@ public class Ordine {
         Rappresentazione DB: La Foreign Key (idOrdine) si trova nella tabella rigaCarrelloVirtuale (il lato "molti").
         */
 
-    @OneToMany(mappedBy = "ordine", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "ordine", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<RigaCarrelloVirtuale> carrello;
 
 
