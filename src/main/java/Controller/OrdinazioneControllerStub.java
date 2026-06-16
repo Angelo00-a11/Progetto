@@ -8,7 +8,8 @@ import java.util.List;
 
 public class OrdinazioneControllerStub {
 
-    public static boolean salvaOrdinazione(ArrayList<String> piatti, ArrayList<Integer> quantita, String via, String civico, String cap, String citta) {
+    public static boolean salvaOrdinazione(ArrayList<String> piatti, ArrayList<Integer> quantita, String via,
+            String civico, String cap, String citta, Long ristoranteId) {
         try {
             Cliente cliente = (Cliente) Session.getInstance().getUtenteLoggato();
             if (cliente == null) {
@@ -34,13 +35,12 @@ public class OrdinazioneControllerStub {
             }
 
             // Delega tutto al GestoreOrdini
-            Ordine ordine = go.registraOrdine(cliente, indirizzoConsegna, carrello);
+            Ordine ordine = go.registraOrdine(cliente, indirizzoConsegna, carrello, ristoranteId);
             if (ordine != null) {
                 System.out.println("Ordinazione salvata con successo");
                 return true;
             }
             return false;
-
         } catch (Exception e) {
             System.out.println("Errore durante il salvataggio dell'ordinazione: " + e.getMessage());
             e.printStackTrace();

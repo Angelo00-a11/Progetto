@@ -18,7 +18,6 @@ public class GestorePersistenza {
      * L'oggetto passato deve però essere una Entity, cioè una classe
      * annotata con @Entity.
      */
-    //public void salva(Object oggetto) {
     public boolean salva(Object oggetto) {
         EntityManager em = JpaUtil.getInstance().getEntityManager();
 

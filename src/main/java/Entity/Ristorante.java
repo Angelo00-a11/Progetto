@@ -43,7 +43,8 @@ public class Ristorante {
     public Ristorante() {
     }
 
-    public Ristorante(String nome, String descrizione, String via, String civico, String citta, int cap, String giorno, int inizioServizio, int fineServizio, Ristoratore r) {
+    public Ristorante(String nome, String descrizione, String via, String civico, String citta, int cap, String giorno,
+            int inizioServizio, int fineServizio, Ristoratore r) {
         this.nome = nome;
         this.descrizione = descrizione;
         this.indirizzoRistorante = new Indirizzo(via, civico, cap, citta);
@@ -56,21 +57,27 @@ public class Ristorante {
     public Long getId() {
         return id;
     }
+
     public void setId(Long id) {
         this.id = id;
     }
+
     public String getNome() {
         return nome;
     }
+
     public void setNome(String nome) {
         this.nome = nome;
     }
+
     public String getDescrizione() {
         return descrizione;
     }
+
     public void setDescrizione(String descrizione) {
         this.descrizione = descrizione;
     }
+
     public Indirizzo getIndirizzoRistorante() {
         return indirizzoRistorante;
     }
@@ -82,6 +89,7 @@ public class Ristorante {
     public List<Data> getOrariApertura() {
         return orariApertura;
     }
+
     public void setOrariApertura(List<Data> orariApertura) {
         this.orariApertura = orariApertura;
     }
@@ -89,6 +97,7 @@ public class Ristorante {
     public List<Piatto> getMenu() {
         return menu;
     }
+
     public void setMenu(List<Piatto> menu) {
         this.menu = menu;
     }
@@ -96,6 +105,7 @@ public class Ristorante {
     public List<Ordine> getOrdiniRicevuti() {
         return ordiniRicevuti;
     }
+
     public void setOrdiniRicevuti(List<Ordine> ordiniRicevuti) {
         this.ordiniRicevuti = ordiniRicevuti;
     }
@@ -103,6 +113,7 @@ public class Ristorante {
     public Ristoratore getRistoratoreResponsabile() {
         return ristoratoreResponsabile;
     }
+
     public void setRistoratoreResponsabile(Ristoratore ristoratoreResponsabile) {
         this.ristoratoreResponsabile = ristoratoreResponsabile;
     }
@@ -112,13 +123,14 @@ public class Ristorante {
         System.out.println("Quanti piatti vuoi inserire?");
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
+        sc.nextLine(); // consume newline
         for (int i = 0; i < n; i++) {
             System.out.println("Inserisci il nome del piatto:");
             String nome = sc.nextLine();
             System.out.println("Inserisci la descrizione del piatto:");
-            String desc = sc.next();
+            String desc = sc.nextLine();
             System.out.println("Inserisci il prezzo del piatto:");
-            float prezzo = sc.nextFloat();
+            float prezzo = Float.parseFloat(sc.nextLine().trim());
             Piatto p1 = new Piatto(nome, desc, prezzo);
             tempMenu.add(p1);
         }
@@ -127,15 +139,27 @@ public class Ristorante {
     }
 
     public void ModificaMenu(ArrayList<Piatto> p, int command) {
-        if (command == 1) {menu.addAll(p);}
-        if (command == 2) {menu.removeAll(p);}
-        if (command == -1) {menu.clear();}
+        if (command == 1) {
+            menu.addAll(p);
+        }
+        if (command == 2) {
+            menu.removeAll(p);
+        }
+        if (command == -1) {
+            menu.clear();
+        }
     }
 
-    public void addOrariApertura(Data d) {orariApertura.add(d);}
+    public void addOrariApertura(Data d) {
+        orariApertura.add(d);
+    }
 
-    public void removeOrariApertura(Data d) {orariApertura.remove(d);}
+    public void removeOrariApertura(Data d) {
+        orariApertura.remove(d);
+    }
 
-    public void addOrdine_Ricevuti(Ordine o) {ordiniRicevuti.add(o);}
+    public void addOrdine_Ricevuti(Ordine o) {
+        ordiniRicevuti.add(o);
+    }
 
 }
