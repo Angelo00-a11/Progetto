@@ -4,7 +4,6 @@ import Entity.GestoreOrdini;
 import Entity.Notifica;
 import Entity.Ordine;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -12,17 +11,15 @@ import java.util.List;
  */
 public class GestisciOrdineController {
 
-    //istanziamo il gestore ordini
-    private static GestoreOrdini gestoreOrdini = new GestoreOrdini();
-
-    //questo metodo crea 2 oggetti ordini finti per far credere al sistema che ci sia un database
     public static List<Ordine> getOrdiniInviati() {
+        GestoreOrdini gestoreOrdini = new GestoreOrdini();
         return gestoreOrdini.cercaOrdiniInStato("inviato");
     }
 
     // Viene chiamato dal bottone "ACCETTA" del FormDettagliOrdine
     //a questo metodo viene passato l'ordine del database
     public static boolean accettaOrdine(Ordine ordine) {
+        GestoreOrdini gestoreOrdini = new GestoreOrdini();
         if (ordine == null || !ordine.getStatoOrdine().equalsIgnoreCase("inviato")) return false;
 
         // Modifica l'oggetto in memoria
@@ -43,6 +40,7 @@ public class GestisciOrdineController {
 
     // Viene chiamato dal FormAggiornaStatoOrdine
     public static boolean segnalaOrdinePronto(Ordine ordine) {
+        GestoreOrdini gestoreOrdini = new GestoreOrdini();
         if (ordine == null || !ordine.getStatoOrdine().equalsIgnoreCase("in preparazione")) return false;
 
         Ordine aggiornato = gestoreOrdini.aggiornaOrdine("in consegna", ordine.getIndirizzoConsegna(), ordine.getId());
@@ -57,6 +55,7 @@ public class GestisciOrdineController {
 
     // Viene chiamato dal bottone "RIFIUTA" del FormDettagliOrdine
     public static boolean rifiutaOrdine(Ordine ordine) {
+        GestoreOrdini gestoreOrdini = new GestoreOrdini();
         if (ordine == null || !ordine.getStatoOrdine().equalsIgnoreCase("inviato")) return false;
 
         Ordine aggiornato = gestoreOrdini.aggiornaOrdine("rifiutato", ordine.getIndirizzoConsegna(), ordine.getId());

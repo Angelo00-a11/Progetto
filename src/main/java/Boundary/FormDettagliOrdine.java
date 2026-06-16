@@ -5,7 +5,6 @@ package Boundary;
 import Controller.GestisciOrdineController;
 import Entity.Ordine;
 import Entity.RigaCarrelloVirtuale;
-import Entity.Piatto;
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
 import com.intellij.uiDesigner.core.Spacer;
@@ -14,7 +13,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.lang.reflect.Method;
 
 public class FormDettagliOrdine {
 

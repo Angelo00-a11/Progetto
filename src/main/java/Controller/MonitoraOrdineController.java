@@ -7,35 +7,26 @@ import java.util.List;
 
 public class MonitoraOrdineController {
 
-    private final GestoreOrdini gestoreOrdini;
+    public static List<Ordine> richiediListaOrdini(Long idCliente){
 
-    public MonitoraOrdineController()
-    {
-        this.gestoreOrdini = new GestoreOrdini();
-    }
-
-
-    public List<Ordine> richiediListaOrdini(Long idCliente)
-    {
-        if (idCliente == null)
-        {
+        GestoreOrdini gestoreOrdini = new GestoreOrdini();
+        if (idCliente == null) {
             return null;
         }
 
         return gestoreOrdini.cercaOrdiniDelCliente(idCliente);
     }
 
-    public String richiediStatoOrdine(Long idOrdine, Long idCliente)
-    {
-       if (idOrdine == null || idCliente == null)
-       {
+    public static String richiediStatoOrdine(Long idOrdine, Long idCliente) {
+
+        GestoreOrdini gestoreOrdini = new GestoreOrdini();
+        if (idOrdine == null || idCliente == null) {
            return null;
        }
 
        String stato =  gestoreOrdini.cercaStatoOrdine(idOrdine, idCliente);
 
-       if (stato == null )
-       {
+       if (stato == null ) {
            return "Stato non riconosciuto";
        }
 

@@ -1,6 +1,5 @@
-package Boundary.FormMonitoraOrdine;
+package Boundary;
 
-import Boundary.Navigator;
 import Controller.MonitoraOrdineController;
 import Database.Session;
 import Entity.Cliente;
@@ -110,7 +109,7 @@ public class FormMonitoraOrdine {
 
         Long idCliente = cliente.getId();
 
-        List<Ordine> ordini = controller.richiediListaOrdini(idCliente);
+        List<Ordine> ordini = MonitoraOrdineController.richiediListaOrdini(idCliente);
 
         DefaultTableModel model = new DefaultTableModel();
 
@@ -170,7 +169,7 @@ public class FormMonitoraOrdine {
 
         Long idCliente = cliente.getId();
 
-        String stato = controller.richiediStatoOrdine(idOrdine, idCliente);
+        String stato = MonitoraOrdineController.richiediStatoOrdine(idOrdine, idCliente);
 
         lblStato.setText("Stato dell'ordine " + idOrdine + " : " + stato);
     }

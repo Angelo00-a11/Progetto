@@ -24,7 +24,7 @@ public class Register extends JDialog {
     private JTextField nCivicoTextField;
     private JTextField cittaTextField;
     private JTextField capTextField;
-    private Navigator navigator;
+    private final Navigator navigator;
 
     public Register(Navigator navigator) {
         this.navigator = navigator;

@@ -26,14 +26,15 @@ public class GestoreOrdini {
 
         Ordine o = cliente.creaOrdine((ArrayList<RigaCarrelloVirtuale>) carrello,indirizzoConsegna);
         cliente.Ordina(o);
+        Notifica notifica = o.creaNotifica(o.getStatoOrdine());
 
         // Collega ogni riga all'ordine
         for (RigaCarrelloVirtuale riga : o.getCarrello()) {
             riga.setOrdine(o);
         }
 
-        // Persisti l'ordine e le sue righe del carrello
-        boolean esito = gp.salva(o);
+        // Persisti nella stessa transazione l'ordine e la notifica associata
+        boolean esito = gp.salvaTutti(notifica, o);
 
         if (esito) {
             gp.aggiorna(cliente);

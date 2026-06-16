@@ -4,7 +4,6 @@ import Controller.GestisciOrdineController;
 import Entity.Ordine;
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
-import org.hibernate.engine.jdbc.batch.JdbcBatchLogging;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;

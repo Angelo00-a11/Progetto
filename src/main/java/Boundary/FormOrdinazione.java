@@ -1,7 +1,6 @@
 package Boundary;
 
 import Controller.OrdinazioneControllerStub;
-import Controller.RegisterController;
 import Entity.Piatto;
 import Entity.Ristorante;
 import com.intellij.uiDesigner.core.GridConstraints;

@@ -1,9 +1,6 @@
 package Entity;
 
 import jakarta.persistence.*;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
 
 @Entity
 @Table(name = "piatti")

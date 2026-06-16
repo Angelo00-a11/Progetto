@@ -44,6 +44,9 @@ public class Ordine {
             referencedColumnName = "id", // Riferimento alla colonna PK in Utente/Cliente
             nullable = false)
     private Cliente cliente;
+    @Column(name = "ristorante_id", nullable = false)
+    private Long ristoranteId;
+    // Existing line kept as is for setCliente method insertion below
 
     /*  - mappedBy = (Si usa solo la navigabiltà è bidirezionale) "ordine" è posta sul lato inverso della relazione (il lato "uno", che non contiene la Foreign Key). Dice a JPA che la relazione è gestita dal campo ordine (che è un @ManyToOne) nell'entità RigaCarrelloVirtuale.
         - cascade = CascadeType.ALL: Indica che le operazioni di persistenza (salvataggio, aggiornamento, eliminazione) eseguite sull'entità Ordine devono essere propagate anche alle entità RigaCarrelloVirtuale associate.
@@ -129,5 +132,19 @@ public class Ordine {
             }
         }
         return totale;
+    }
+
+    public Notifica creaNotifica(String statoOrdine){
+        String text = "";
+        if(statoOrdine == null){return null;}
+        else if(statoOrdine.equalsIgnoreCase("Inviato")){
+            text = "Ordine inviato al ristorante.";
+        } else if(statoOrdine.equalsIgnoreCase("In preparazione")){
+            text = "Il ristorante ha iniziato a preparare il tuo ordine.";
+        }
+
+        Notifica n = new Notifica(text, "creata");
+        this.setNotifica(n);
+        return n;
     }
 }

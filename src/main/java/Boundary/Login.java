@@ -1,7 +1,6 @@
 package Boundary;
 
 import Controller.LoginController;
-import Controller.RegisterController;
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
 import com.intellij.uiDesigner.core.Spacer;
