@@ -134,7 +134,6 @@ public class FormAmministratore {
         tblRistoranti.setModel(new DefaultTableModel(colonne, 0));
     }
 
-//prova 
 
 /*
     public static void main(String[] args) {
