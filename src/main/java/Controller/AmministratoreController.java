@@ -59,8 +59,8 @@ public class AmministratoreController {
                 LocalDate dataOrdine = o.getData();
                 // 1. se l'ordine non ha data (= non è ancora stato inviato), scarto e vado avanti
                 if (dataOrdine == null) continue;
-                // 2. se l'ordine non è stato evaso, scarto e vado avanti
-                if(!"evaso".equalsIgnoreCase(o.getStatoOrdine())) continue;
+                // 2. se l'ordine non è stato confermato, scarto e vado avanti
+                if(!"In preparazione".equalsIgnoreCase(o.getStatoOrdine())) continue;
                 // 3. se l'ordine non è nel periodo, scarto e vado avanti
                 boolean nelPeriodo = !dataOrdine.isBefore(dataInizio) && !dataOrdine.isAfter(dataFine);
                 if (nelPeriodo) {

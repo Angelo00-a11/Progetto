@@ -98,7 +98,7 @@ public class Navigator extends JFrame {
     }
 
     public void showMonitoraSistema(){
-        setTitle("Gestione Sistema");
+        setTitle("Monitoraggio Sistema");
         layout.show(container, "MONITORA_SISTEMA");
     }
 
