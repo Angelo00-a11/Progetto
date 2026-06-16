@@ -170,7 +170,7 @@ public class FormMonitoraOrdine {
 
         Long idCliente = cliente.getId();
 
-        String stato = controller.richiediStatoOrdine(idOrdine, idCliente);
+        String stato = controller.richiediStatoOrdine(idCliente, idOrdine);
 
         lblStato.setText("Stato dell'ordine " + idOrdine + " : " + stato);
     }

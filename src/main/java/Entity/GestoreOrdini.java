@@ -122,7 +122,7 @@ public class GestoreOrdini {
         if (idCliente == null) {
             return null;
         }
-        return gp.cercaPerCampo(Ordine.class, "id.Cliente", idCliente); //CERCA TUTTI GLI ORDINI ASSOCIATI AL CLIENTE CON ID "IDCLIENTE" INTERROGANDO IL GP
+        return gp.cercaPerCampo(Ordine.class, "cliente.id", idCliente); //CERCA TUTTI GLI ORDINI ASSOCIATI AL CLIENTE CON ID "IDCLIENTE" INTERROGANDO IL GP
     }
 
     //dato un cliente, dato un ordine ne restituisce lo stato
