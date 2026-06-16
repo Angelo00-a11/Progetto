@@ -45,7 +45,8 @@ public class Ordine {
             nullable = false)
     private Cliente cliente;
     @Column(name = "ristorante_id", nullable = false)
-    private Long ristoranteId;
+    private Long ristoranteOrdinato;
+    
     // Existing line kept as is for setCliente method insertion below
 
     /*  - mappedBy = (Si usa solo la navigabiltà è bidirezionale) "ordine" è posta sul lato inverso della relazione (il lato "uno", che non contiene la Foreign Key). Dice a JPA che la relazione è gestita dal campo ordine (che è un @ManyToOne) nell'entità RigaCarrelloVirtuale.
@@ -87,6 +88,14 @@ public class Ordine {
 
     public Cliente getCliente() {return cliente;}
     public void setCliente(Cliente cliente) {this.cliente = cliente;}
+
+    public Long getRistoranteOrdinato() {
+        return ristoranteOrdinato;
+    }
+
+    public void setRistoranteOrdinato(Long ristoranteOrdinato) {
+        this.ristoranteOrdinato = ristoranteOrdinato;
+    }
     //non dev'essere possibile cambiare il cliente che ha eseguito l'ordine
     //eppure mi serve nel gestore ordini
 

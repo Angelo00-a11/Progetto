@@ -219,8 +219,7 @@ public class FormOrdinazione {
         Body.removeAll();
         Body.setLayout(new BoxLayout(Body, BoxLayout.Y_AXIS));
 
-        for (int i = 0; i < menu.size(); i++) {
-            Piatto piatto = menu.get(i);
+        for (Piatto piatto : menu) {
             JPanel rigaMenu = new JPanel();
             rigaMenu.setLayout(new FlowLayout(FlowLayout.LEFT));
 
