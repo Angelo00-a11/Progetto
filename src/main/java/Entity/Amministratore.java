@@ -69,7 +69,7 @@ public class Amministratore extends Utente {
     }
 
     //INPUT: lista ristoranti e intervallo di date - OUTPUT: volume medio ordini nel periodo
-    // NOTA: la List<Ristorante> contiene solo ristoranti che hanno evaso almeno un ordine nel periodo !
+    // NOTA: la List<Ristorante> contiene solo ristoranti che hanno confermato almeno un ordine nel periodo !
     private double calcoloVolumeMedioOrdini(List<Ristorante> ristoranti, LocalDate dataInizio, LocalDate dataFine){
         double totale = 0;
         int numOrdini = 0;
@@ -113,8 +113,8 @@ public class Amministratore extends Utente {
         for(Ordine o : ristorante.getOrdiniRicevuti()){
             LocalDate dataOrdine = o.getData();
             boolean nelPeriodo = !dataOrdine.isBefore(dataInizio) && !dataOrdine.isAfter(dataFine);
-            boolean evaso = "evaso".equalsIgnoreCase(o.getStatoOrdine());
-            if (nelPeriodo && evaso){
+            boolean confermato = "In preparazione".equalsIgnoreCase(o.getStatoOrdine());
+            if (nelPeriodo && confermato){
                 daConsiderare.add(o);
             }
         }
